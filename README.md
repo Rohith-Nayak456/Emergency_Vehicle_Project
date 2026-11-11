@@ -24,10 +24,10 @@ This package contains the Teammate 3 Emergency Decision Engine and Four-Way Traf
 
 Run from the project root:
 
-py -3.14 -m venv .venv
+`py -3.14 -m venv .venv
 ..venv\Scripts\activate.bat
 python -m pip install --upgrade pip
-pip install -r requirements.txt
+pip install -r requirements.txt`
 
 Dependencies were import-checked with Python 3.14.3. Confirm compatibility with the team's agreed Python version before final integration.
 
@@ -39,7 +39,7 @@ from src.decision_engine import process_emergency_decision
 
 # Validate raw inference output against decision policies
 
-decision = process_emergency_decision(
+`decision = process_emergency_decision(
 inference_result={
 "status": "success",
 "emergency_detected": True,
@@ -49,25 +49,24 @@ inference_result={
 },
 min_confidence=0.85
 )
-print(decision)
+print(decision)`
 
 ### 2. Request Signal Preemption
 
-from src.signal_controller import SignalController
-
-controller = SignalController()
+`from src.signal_controller import SignalController
+controller = SignalController()`
 
 # Transition signals safely to grant priority passage
 
-status = controller.request_emergency_preemption(
+`status = controller.request_emergency_preemption(
 direction="NORTH",
 emergency_type="ambulance"
 )
-print(status)
+print(status)`
 
 ## Run tests
 
-python -m pytest -v
+`python -m pytest -v`
 
 Tests evaluate deterministic state transitions, threshold validation, edge cases, and safety fail-safes without requiring live camera feeds or external hardware dependencies.
 
