@@ -1,0 +1,52 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Datasets (too large for git ~4GB)
+data/
+datasets/
+*.zip
+
+# Training runs (generated during training)
+runs/
+training_output/
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Pytest cache
+.pytest_cache/
+
+# Environment files
+.env
+.env.*
+
+# Distribution
+dist/
+build/
+*.egg-info/
+
+# NOTE: models/best.pt IS tracked (small ~5MB)
+# Do NOT add models/*.pt to gitignore

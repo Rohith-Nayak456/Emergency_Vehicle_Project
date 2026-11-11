@@ -1,0 +1,131 @@
+================================================================================
+     YOLO DATASET COMPREHENSIVE QUALITY INSPECTION REPORT
+================================================================================
+Dataset Location : C:\Users\Asus\Downloads\rm task\combined_dataset
+Output Directory : C:\Users\Asus\Downloads\rm task\Emergency_Vehicle_Project\results\dataset_report
+Configured Classes: {0: 'car', 1: 'motorcycle', 2: 'autorickshaw', 3: 'truck', 4: 'bus', 5: 'bicycle', 6: 'ambulance', 7: 'police_car'}
+================================================================================
+
+1. IMAGE-LABEL PAIRING CHECK
+----------------------------------------
+Split: 'train'
+  Total Images Found : 8341
+  Total Labels Found : 8341
+  Image Extensions   : {'.png': 8341}
+  Orphan Images      : 0
+  Orphan Labels      : 0
+
+Split: 'val'
+  Total Images Found : 1398
+  Total Labels Found : 1398
+  Image Extensions   : {'.png': 1398}
+  Orphan Images      : 0
+  Orphan Labels      : 0
+
+2. YOLO ANNOTATION VALIDATION
+----------------------------------------
+Split: 'train'
+  Total Label Files Inspected    : 8341
+  Empty Label Files (Background) : 173
+  Total Bounding Boxes           : 46048
+  Valid Bounding Boxes           : 46048
+  Invalid Token Count (!=5)      : 0
+  Invalid Class IDs (<0 or >=8)  : 0
+  Invalid Coordinate Format      : 0
+  Center/Dim Out-of-Range [0,1]  : 0
+  BBox Bounds Exceeding [0,1]    : 1351 (Severe >5%: 0)
+
+Split: 'val'
+  Total Label Files Inspected    : 1398
+  Empty Label Files (Background) : 46
+  Total Bounding Boxes           : 7045
+  Valid Bounding Boxes           : 7045
+  Invalid Token Count (!=5)      : 0
+  Invalid Class IDs (<0 or >=8)  : 0
+  Invalid Coordinate Format      : 0
+  Center/Dim Out-of-Range [0,1]  : 0
+  BBox Bounds Exceeding [0,1]    : 186 (Severe >5%: 0)
+
+3. IMAGE READABILITY & INTEGRITY SAMPLING
+----------------------------------------
+Split: 'train' (Sample Size: 200 of 8341)
+  Corrupt Images Detected : 0
+  Image Formats Found     : {'PNG': 200}
+  Color Modes Found       : {'RGB': 200}
+  Resolution Summary      : min=(512x512), max=(512x512), avg=(512x512)
+
+Split: 'val' (Sample Size: 200 of 1398)
+  Corrupt Images Detected : 0
+  Image Formats Found     : {'PNG': 200}
+  Color Modes Found       : {'RGB': 200}
+  Resolution Summary      : min=(512x512), max=(512x512), avg=(512x512)
+
+4. CLASS DISTRIBUTION (OBJECT-LEVEL & IMAGE-LEVEL)
+----------------------------------------
+Class ID Class Name      Train Objs   Train %    Val Objs   Val %      Train Imgs   Val Imgs
+-------------------------------------------------------------------------------------
+0        car             16335        35.47    % 2618       37.16    % 6555         1086
+1        motorcycle      4010         8.71     % 632        8.97     % 3185         502
+2        autorickshaw    3461         7.52     % 513        7.28     % 2581         368
+3        truck           12144        26.37    % 2022       28.70    % 5603         920
+4        bus             2264         4.92     % 220        3.12     % 2008         198
+5        bicycle         6776         14.72    % 1024       14.54    % 4388         693
+6        ambulance       549          1.19     % 12         0.17     % 549          12
+7        police_car      509          1.11     % 4          0.06     % 509          4
+-------------------------------------------------------------------------------------
+TOTAL                    46048        100.0%     7045       100.0%     8341         1398
+
+Class Imbalance in Train (Max vs Min): car (16335) vs police_car (509) -> Ratio: 32.1:1
+
+5. DUPLICATE DETECTION (MD5 HASHES OF ALL IMAGES)
+----------------------------------------
+Computing MD5 hashes across all train and val images...
+Total Unique Hashes: 9739
+Exact Duplicate Groups within Train: 0
+  Total duplicate files involved in Train: 0
+Exact Duplicate Groups within Val: 0
+  Total duplicate files involved in Val: 0
+CRITICAL: Exact Duplicates Across Train & Val (LEAKAGE): 0 groups
+  [PASS] No exact hash duplicates found between train and val.
+
+6. AUGMENTATION PATTERN CHECK & SPLIT LEAKAGE
+----------------------------------------
+Inferred Base Image Roots: 1315
+Groups with Augmented/Multiple Variants: 1315
+Augmentation Pattern Types Identified: {'numbered_variant': 1, 'keyword_aug': 1314}
+CRITICAL: Augmentation Split Leakage Groups: 1
+  Total Images Involved in Augmentation Leakage: 5595 in train, 1398 in val
+  Sample Augmentation Leakage Pairs (Original/Variant in Train, Variant in Val):
+    Leak #1 [Base: Image]:
+      Train (5595): ['Image_0.png', 'Image_10.png', 'Image_100.png']
+      Val   (1398): ['Image_1.png', 'Image_1002.png', 'Image_101.png']
+
+7. EMERGENCY CLASS ANALYSIS (AMBULANCE & POLICE_CAR)
+----------------------------------------
+Class 6: Ambulance
+  Train: 549 objects in 549 images (6.58% of train images)
+  Val  : 12 objects in 12 images (0.86% of val images)
+  Total: 561 objects in 561 images
+
+Class 7: Police Car
+  Train: 509 objects in 509 images (6.10% of train images)
+  Val  : 4 objects in 4 images (0.29% of val images)
+  Total: 513 objects in 513 images
+
+Emergency vs Non-Emergency Totals:
+  Train Emergency Objects     : 1058 (2.30% of total)
+  Train Non-Emergency Objects : 44990 (97.70% of total)
+  Val Emergency Objects       : 16 (0.23% of total)
+  Val Non-Emergency Objects   : 7029 (99.77% of total)
+
+Reliability Assessment for Validation Split:
+  * CRITICAL DEFICIENCY: Ambulance has only 12 objects (12 images) in val. Insufficient for statistically reliable mAP evaluation.
+  * CRITICAL DEFICIENCY: Police Car has only 4 objects (4 images) in val. Insufficient for statistically reliable mAP evaluation.
+
+8. SUMMARY OF ISSUES & ACTIONABLE RECOMMENDATIONS
+----------------------------------------
+- AUGMENTATION LEAKAGE: 1 image root groups have variants split across train and val.
+  RECOMMENDATION: Group images by original capture/video sequence before splitting into train/val.
+================================================================================
+END OF INSPECTION REPORT
+================================================================================
