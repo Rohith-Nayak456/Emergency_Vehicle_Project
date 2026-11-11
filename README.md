@@ -24,10 +24,12 @@ This package contains the Teammate 3 Emergency Decision Engine and Four-Way Traf
 
 Run from the project root:
 
-`py -3.14 -m venv .venv
+```cmd
+py -3.14 -m venv .venv
 ..venv\Scripts\activate.bat
 python -m pip install --upgrade pip
-pip install -r requirements.txt`
+pip install -r requirements.txt
+```
 
 Dependencies were import-checked with Python 3.14.3. Confirm compatibility with the team's agreed Python version before final integration.
 
