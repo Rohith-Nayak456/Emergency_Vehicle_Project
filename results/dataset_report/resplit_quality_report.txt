@@ -1,0 +1,115 @@
+================================================================================
+  DATASET QUALITY REPORT — RE-SPLIT DATASET
+  Emergency Vehicle Detection & Adaptive Signal Preemption
+  Generated: 2026-11-11
+================================================================================
+
+1. DATASET OVERVIEW
+--------------------------------------------------------------------------------
+  Source:          C:\Users\Asus\Downloads\rm task\combined_dataset
+  Re-split output: C:\Users\Asus\Downloads\rm task\Emergency_Vehicle_Project\data\split_dataset
+  Split ratio:     70 / 15 / 15 (train / val / test)
+  Random seed:     42
+  Grouping:        Augmented images (_bal*) grouped with originals by Image_N ID
+  Total images:    9,739
+  Image format:    PNG, 512x512, RGB
+  Classes:         8 (car, motorcycle, autorickshaw, truck, bus, bicycle, ambulance, police_car)
+
+2. SPLIT DISTRIBUTION
+--------------------------------------------------------------------------------
+  Split     Images     %       Labels  Orphan-Img  Orphan-Lbl  Empty-Labels
+  Train      6,836   70.2%      6,836           0           0           154
+  Val        1,412   14.5%      1,412           0           0            32
+  Test       1,491   15.3%      1,491           0           0            33
+  TOTAL      9,739  100.0%      9,739           0           0           219
+
+3. ANNOTATION VALIDATION
+--------------------------------------------------------------------------------
+  Total bounding boxes: 53,093
+  Invalid token count:  0
+  Invalid class IDs:    0
+  Invalid coordinates:  0
+  Annotation errors:    0
+  STATUS: ALL PASS
+
+4. CLASS DISTRIBUTION (OBJECT-LEVEL)
+--------------------------------------------------------------------------------
+  Class            Train     Val    Test   Total    Train%   Val%   Test%
+  car             13,400   2,760   2,793  18,953    35.6%  36.4%   35.4%
+  motorcycle       3,284     657     701   4,642     8.7%   8.7%    8.9%
+  autorickshaw     2,836     569     569   3,974     7.5%   7.5%    7.2%
+  truck           10,082   1,997   2,087  14,166    26.8%  26.4%   26.4%
+  bus              1,716     376     392   2,484     4.6%   5.0%    5.0%
+  bicycle          5,511   1,115   1,174   7,800    14.6%  14.7%   14.9%
+  ambulance          433      48      80     561     1.2%   0.6%    1.0%  ***
+  police_car         364      54      95     513     1.0%   0.7%    1.2%  ***
+  TOTAL           37,626   7,576   7,891  53,093
+
+5. EMERGENCY CLASS ANALYSIS
+--------------------------------------------------------------------------------
+  Ambulance:
+    Total unique original scenes:  94
+    Total images (incl. augmented): 561
+    Train: 433 images (433 objects)
+    Val:    48 images  (48 objects)
+    Test:   80 images  (80 objects)
+
+  Police Car:
+    Total unique original scenes:  40
+    Total images (incl. augmented): 513
+    Train: 364 images (364 objects)
+    Val:    54 images  (54 objects)
+    Test:   95 images  (95 objects)
+
+  Assessment:
+    - Val has 48 ambulance + 54 police_car images — MARGINAL but usable
+      (recommended minimum: 50-100 per class for stable mAP)
+    - Test has 80 ambulance + 95 police_car images — ADEQUATE for evaluation
+    - The underlying number of UNIQUE scenes is limited (94 ambulance, 40 police_car)
+    - Augmented copies increase quantity but not visual diversity
+    - Emergency class recall metrics should be interpreted with caution
+
+6. DATA INTEGRITY CHECKS
+--------------------------------------------------------------------------------
+  Image-label pairing:            ALL PASS (0 orphans in any split)
+  Annotation format validation:   ALL PASS (0 errors in 53,093 boxes)
+  Cross-split filename overlap:   ALL PASS (0 shared filenames)
+  Augmentation group leakage:     ALL PASS (0 groups split across sets)
+  MD5 hash duplicate check:       ALL PASS (0 duplicates within or across splits)
+
+7. CLASS IMBALANCE
+--------------------------------------------------------------------------------
+  Max class (train): car (13,400 objects)
+  Min class (train): police_car (364 objects)
+  Imbalance ratio:   36.8:1
+
+  Emergency classes represent 2.1% of all training objects.
+  This imbalance may cause lower recall for emergency vehicles.
+  Recommendation: Use class-weighted loss or focal loss during training.
+
+8. ORIGINAL VS. AUGMENTED COMPOSITION
+--------------------------------------------------------------------------------
+  Total unique image groups (originals): 6,993
+  Total augmented (_bal*) images:        2,746 (all in train split)
+  Val and Test contain ONLY original images (0 augmented)
+
+9. LIMITATIONS
+--------------------------------------------------------------------------------
+  - Only 94 unique ambulance scenes and 40 unique police_car scenes exist
+  - Augmented copies share the same visual content as originals
+  - Emergency-class mAP values will have higher variance than majority classes
+  - Dataset was collected and resized to 512x512 — original provenance unknown
+  - No test for near-duplicate images (perceptual hashing) was performed
+  - Collecting additional real emergency vehicle images would improve reliability
+
+10. RECOMMENDATIONS
+--------------------------------------------------------------------------------
+  1. Proceed with training on this split — it is the best achievable with available data
+  2. Use early stopping on val mAP to prevent overfitting
+  3. Report per-class metrics, especially emergency recall, alongside overall mAP
+  4. In the final report, acknowledge the limited emergency scene diversity
+  5. For future work, collect more diverse emergency vehicle images
+
+================================================================================
+  END OF DATASET QUALITY REPORT
+================================================================================
