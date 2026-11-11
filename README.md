@@ -41,7 +41,8 @@ from src.decision_engine import process_emergency_decision
 
 # Validate raw inference output against decision policies
 
-`decision = process_emergency_decision(
+```python
+ decision = process_emergency_decision(
 inference_result={
 "status": "success",
 "emergency_detected": True,
@@ -51,24 +52,31 @@ inference_result={
 },
 min_confidence=0.85
 )
-print(decision)`
+print(decision)
+```
 
 ### 2. Request Signal Preemption
 
-`from src.signal_controller import SignalController
-controller = SignalController()`
+```python
+from src.signal_controller import SignalController
+controller = SignalController()
+```
 
 # Transition signals safely to grant priority passage
 
-`status = controller.request_emergency_preemption(
+```python
+status = controller.request_emergency_preemption(
 direction="NORTH",
 emergency_type="ambulance"
 )
-print(status)`
+print(status)
+```
 
 ## Run tests
 
-`python -m pytest -v`
+```python
+python -m pytest -v`
+```
 
 Tests evaluate deterministic state transitions, threshold validation, edge cases, and safety fail-safes without requiring live camera feeds or external hardware dependencies.
 
