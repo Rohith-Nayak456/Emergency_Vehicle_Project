@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches and virtual environments
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+ENV/
+
+# Model weights (coordinate with teammates; do not commit large binary weights)
+models/*.pt
+models/*.onnx
+models/*.engine
+!models/.gitkeep
+
+# Output and run artifacts
+runs/
+outputs/
+output/
+*.log
+
+# OS artifacts
+.DS_Store
+Thumbs.db
